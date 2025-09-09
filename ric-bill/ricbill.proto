@@ -16,6 +16,8 @@ service Billing {
   rpc DeactivateSubscription(SubscriptionRequest) returns (SubscriptionResponse);
   rpc SendReceipt(ReceiptRequest) returns (ReceiptResponse);
   rpc ValidatePromocode(ValidatePromocodeRequest) returns (ValidatePromocodeResponse);
+  rpc ReservePromocode(ReservePromocodeRequest) returns (ReservePromocodeResponse);
+  rpc UnreservePromocode(UnreservePromocodeRequest) returns (SuccessResponse);
 }
 
 message UserContext {
@@ -85,3 +87,19 @@ message ValidatePromocodeResponse {
   string price = 4;
   double discount_percent = 5;
 }
+
+message ReservePromocodeRequest {
+  UserContext ctx = 1;
+  string license_id = 2;
+  string code = 3;
+}
+
+message ReservePromocodeResponse {
+  string discount = 1;
+}
+
+message UnreservePromocodeRequest {
+  UserContext ctx = 1;
+  string license_id = 2;
+}
+
