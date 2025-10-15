@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package ric.reports;
+
+option go_package = "./ric-reports;ricreports";
+
+service RicReport {
+  rpc Export(ExportRequest) returns (stream FileChunk);
+}
+
+message UserContext {
+  string group_id = 1;
+  string user_id = 2;
+  string span_id = 3;
+}
+
+message FileChunk {
+  bytes data = 1;
+  string filename = 2;
+  string encoding = 3; // "text" or "binary"
+  string content_type = 4;
+}
+
+message ExportRequest {
+  UserContext ctx = 1;
+  string build_id = 2;
+  string format = 3;
+}
+

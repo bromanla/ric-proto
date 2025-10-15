@@ -15,6 +15,7 @@ import { RicWeb } from './ric-web';
 import { RicPacketSpy } from './ric-packet-spy';
 import { Command } from './ric-cmds';
 import { Stats } from './ric-stats';
+import { RicReport } from './ric-reports';
 
 interface GrpcRegistry {
   /* clients */  
@@ -72,6 +73,9 @@ interface GrpcRegistry {
   getClient(service: 'ric-stats'): Stats;
   getClient(service: 'ric-stats/Stats'): Stats;
 
+  getClient(service: 'ric-reports'): RicReport;
+  getClient(service: 'ric-reports/RicReport'): RicReport;
+
 
   /* servers */ 
   addServer(service: 'ric-echo', impl: Greeter);
@@ -127,6 +131,9 @@ interface GrpcRegistry {
 
   addServer(service: 'ric-stats', impl: Stats);
   addServer(service: 'ric-stats/Stats', impl: Stats);
+
+  addServer(service: 'ric-reports', impl: RicReport);
+  addServer(service: 'ric-reports/RicReport', impl: RicReport);
 }
 
 declare const index: { registry: GrpcRegistry };
